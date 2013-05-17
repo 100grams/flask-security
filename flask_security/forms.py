@@ -91,6 +91,8 @@ class Form(BaseForm):
     def __init__(self, *args, **kwargs):
         if current_app.testing:
             self.TIME_LIMIT = None
+        csrf_enabled = request.json is None
+        kwargs.setdefault('csrf_enabled', csrf_enabled)
         super(Form, self).__init__(*args, **kwargs)
 
 
